@@ -1,4 +1,4 @@
-package org.beint.beintappapi.service;
+package org.beint.beintappapi.service.product;
 
 import org.beint.beintappapi.dto.CreateProductDto;
 import org.beint.beintappapi.dto.ProductDto;

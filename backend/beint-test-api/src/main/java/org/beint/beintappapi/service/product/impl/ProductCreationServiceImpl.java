@@ -1,4 +1,4 @@
-package org.beint.beintappapi.service.impl;
+package org.beint.beintappapi.service.product.impl;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +10,7 @@ import org.beint.beintappapi.dto.CreateProductDto;
 import org.beint.beintappapi.dto.ProductDto;
 import org.beint.beintappapi.repository.CategoryRepository;
 import org.beint.beintappapi.repository.ProductRepository;
-import org.beint.beintappapi.service.ProductCreationService;
+import org.beint.beintappapi.service.product.ProductCreationService;
 import org.springframework.stereotype.Service;
 
 import java.util.*;

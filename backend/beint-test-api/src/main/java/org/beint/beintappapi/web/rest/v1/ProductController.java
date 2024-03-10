@@ -8,9 +8,10 @@ import org.beint.beintappapi.dto.UpdateProductDto;
 import org.beint.beintappapi.dto.response.DataResponse;
 import org.beint.beintappapi.dto.response.PageData;
 import org.beint.beintappapi.exceptions.ValidationException;
-import org.beint.beintappapi.service.ProductCreationService;
-import org.beint.beintappapi.service.ProductRetrievalService;
-import org.beint.beintappapi.service.ProductUpdationService;
+import org.beint.beintappapi.service.product.ProductCreationService;
+import org.beint.beintappapi.service.product.ProductDeletionService;
+import org.beint.beintappapi.service.product.ProductRetrievalService;
+import org.beint.beintappapi.service.product.ProductUpdationService;
 import org.beint.beintappapi.utils.ErrorParser;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -30,6 +31,7 @@ public class ProductController {
     private final ProductRetrievalService productRetrievalService;
     private final ProductCreationService productCreationService;
     private final ProductUpdationService productUpdationService;
+    private  final ProductDeletionService productDeletionService;
 
     @GetMapping()
     public ResponseEntity<PageData<ProductDto>> get(Pageable pageable) {
@@ -59,6 +61,12 @@ public class ProductController {
     @GetMapping("/{productId}")
     public ResponseEntity<DataResponse<ProductDto>> get(@PathVariable Long productId) {
         return new ResponseEntity<>(new DataResponse<>(productRetrievalService.getProduct(productId)), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{productId}")
+    public ResponseEntity<String> delete(@PathVariable Long productId) {
+        productDeletionService.delete(productId);
+        return new ResponseEntity<>("Successfully",HttpStatus.OK);
     }
 
 

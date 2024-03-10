@@ -1,4 +1,4 @@
-package org.beint.beintappapi.service.impl;
+package org.beint.beintappapi.service.product.impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -8,7 +8,7 @@ import org.beint.beintappapi.dto.ProductDto;
 import org.beint.beintappapi.dto.response.PageData;
 import org.beint.beintappapi.exceptions.NotFoundException;
 import org.beint.beintappapi.repository.ProductRepository;
-import org.beint.beintappapi.service.ProductRetrievalService;
+import org.beint.beintappapi.service.product.ProductRetrievalService;
 import org.beint.beintappapi.utils.ErrorParser;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

@@ -1,4 +1,4 @@
-package org.beint.beintappapi.service.impl;
+package org.beint.beintappapi.service.product.impl;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +12,7 @@ import org.beint.beintappapi.dto.UpdateProductDto;
 import org.beint.beintappapi.exceptions.NotFoundException;
 import org.beint.beintappapi.repository.CategoryRepository;
 import org.beint.beintappapi.repository.ProductRepository;
-import org.beint.beintappapi.service.ProductUpdationService;
+import org.beint.beintappapi.service.product.ProductUpdationService;
 import org.beint.beintappapi.utils.ErrorParser;
 import org.springframework.stereotype.Service;
 
