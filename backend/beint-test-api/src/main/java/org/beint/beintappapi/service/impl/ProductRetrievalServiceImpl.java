@@ -9,6 +9,7 @@ import org.beint.beintappapi.dto.response.PageData;
 import org.beint.beintappapi.repository.ProductRepository;
 import org.beint.beintappapi.service.ProductRetrievalService;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +26,9 @@ public class ProductRetrievalServiceImpl implements ProductRetrievalService {
     @Override
     public PageData<ProductDto> getProducts(Pageable pageable) {
 
-        Page<Product> productPage = productRepository.findAll(pageable);
+        Pageable queryPageable = PageRequest.of(pageable.getPageNumber(),pageable.getPageSize());
+
+        Page<Product> productPage = productRepository.findAll(queryPageable);
 
         List<ProductDto> productDtos = productPage.getContent().stream().map(productMapper::toDto).toList();
 
