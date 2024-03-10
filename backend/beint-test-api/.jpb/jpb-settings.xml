@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DatabaseMigrationSettings" lastSelectedDirectory="src/main/resources/db/migrations" />
+  <component name="JpaLiquibaseChangesConfig">
+    <exclude-change idName="products#updated_at" tagName="addNotNullConstraint" />
+  </component>
+  <component name="PersistenceUnitSettings">
+    <persistence-units>
+      <persistence-unit name="Default">
+        <packages>
+          <package value="org.beint.beintappapi" />
+        </packages>
+      </persistence-unit>
+    </persistence-units>
+  </component>
+</project>
