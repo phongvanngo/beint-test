@@ -1,7 +1,6 @@
 package org.beint.beintappapi;
 
 import lombok.RequiredArgsConstructor;
-import org.beint.beintappapi.domain.Category;
 import org.beint.beintappapi.repository.CategoryRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,8 +13,6 @@ import org.springframework.core.env.Environment;
 public class BeintAppApiApplication implements ApplicationListener<ApplicationReadyEvent> {
 
     private final Environment environment;
-
-    private final CategoryRepository categoryRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(BeintAppApiApplication.class, args);
