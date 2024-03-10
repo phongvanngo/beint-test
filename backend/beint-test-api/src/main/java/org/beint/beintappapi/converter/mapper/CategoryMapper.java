@@ -4,7 +4,7 @@ import org.beint.beintappapi.domain.Category;
 import org.beint.beintappapi.dto.CategoryDto;
 import org.mapstruct.Mapper;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface CategoryMapper {
     CategoryDto toDto(Category category);
 }
