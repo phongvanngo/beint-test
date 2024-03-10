@@ -4,11 +4,13 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.beint.beintappapi.dto.CreateProductDto;
 import org.beint.beintappapi.dto.ProductDto;
+import org.beint.beintappapi.dto.UpdateProductDto;
 import org.beint.beintappapi.dto.response.DataResponse;
 import org.beint.beintappapi.dto.response.PageData;
 import org.beint.beintappapi.exceptions.ValidationException;
 import org.beint.beintappapi.service.ProductCreationService;
 import org.beint.beintappapi.service.ProductRetrievalService;
+import org.beint.beintappapi.service.ProductUpdationService;
 import org.beint.beintappapi.utils.ErrorParser;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -27,6 +29,7 @@ public class ProductController {
 
     private final ProductRetrievalService productRetrievalService;
     private final ProductCreationService productCreationService;
+    private final ProductUpdationService productUpdationService;
 
     @GetMapping()
     public ResponseEntity<PageData<ProductDto>> get(Pageable pageable) {
@@ -42,5 +45,14 @@ public class ProductController {
         };
 
         return new ResponseEntity<>(new DataResponse<>(productCreationService.createProduct(createProductDto)), HttpStatus.OK);
+    }
+
+    @PutMapping("/{productId}")
+    public ResponseEntity<DataResponse<ProductDto>> create(@PathVariable Long productId, @Valid @RequestBody UpdateProductDto updateProductDto, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            throw new ValidationException(errorParser.get(Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage()));
+        };
+        return new ResponseEntity<>(new DataResponse<>(productUpdationService.updateProduct(productId, updateProductDto)), HttpStatus.OK);
     }
 }
