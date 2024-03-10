@@ -27,6 +27,12 @@ public class ExceptionHandlers {
         return createErrorResponse(exception, HttpStatus.BAD_REQUEST, exception.getErrorCode(), exception.getMessage());
     }
 
+    @ExceptionHandler({ValidationException.class})
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public ResponseEntity<Object> handleValidationError(ValidationException exception) {
+        return createErrorResponse(exception, HttpStatus.BAD_REQUEST, exception.getErrorCode(), exception.getMessage());
+    }
+
     @ExceptionHandler({NotFoundException.class})
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     public ResponseEntity<Object> handleNotFound(NotFoundException exception) {
