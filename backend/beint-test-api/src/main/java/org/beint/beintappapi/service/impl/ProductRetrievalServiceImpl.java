@@ -6,8 +6,10 @@ import org.beint.beintappapi.converter.mapper.ProductMapper;
 import org.beint.beintappapi.domain.Product;
 import org.beint.beintappapi.dto.ProductDto;
 import org.beint.beintappapi.dto.response.PageData;
+import org.beint.beintappapi.exceptions.NotFoundException;
 import org.beint.beintappapi.repository.ProductRepository;
 import org.beint.beintappapi.service.ProductRetrievalService;
+import org.beint.beintappapi.utils.ErrorParser;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -23,6 +25,7 @@ public class ProductRetrievalServiceImpl implements ProductRetrievalService {
     private final ProductMapper productMapper;
 
     private final ProductRepository productRepository;
+    private final ErrorParser errorParser;
     @Override
     public PageData<ProductDto> getProducts(Pageable pageable) {
 
@@ -38,6 +41,13 @@ public class ProductRetrievalServiceImpl implements ProductRetrievalService {
                 productPage.getPageable().getPageSize(),
                 productPage.getTotalElements()
         );
+    }
 
+    @Override
+    public ProductDto getProduct(Long id) {
+        return
+                productMapper.toDto(productRepository.findById(id)
+                        .orElseThrow(() -> new NotFoundException(errorParser.get("product.not-found"))))
+                ;
     }
 }

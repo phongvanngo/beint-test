@@ -3,6 +3,7 @@ package org.beint.beintappapi.service.impl;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ObjectUtils;
 import org.beint.beintappapi.converter.mapper.ProductMapper;
 import org.beint.beintappapi.domain.Category;
 import org.beint.beintappapi.domain.Product;
@@ -15,10 +16,7 @@ import org.beint.beintappapi.service.ProductUpdationService;
 import org.beint.beintappapi.utils.ErrorParser;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -43,26 +41,30 @@ public class ProductUpdationServiceImpl implements ProductUpdationService {
         existingProduct.setType(updateProductDto.getType());
         existingProduct.setBrand(updateProductDto.getBrand());
 
-        // Update the categories of the product
-        List<String> categoryNames = updateProductDto.getCategories();
-        List<Category> existingCategories = categoryRepository.findByNameIn(categoryNames);
-        List<Category> categories = new ArrayList<>();
 
-        for (String categoryName : categoryNames) {
-            Optional<Category> existingCategory = existingCategories.stream()
-                    .filter(category -> category.getName().equals(categoryName))
-                    .findFirst();
+        if (ObjectUtils.isNotEmpty(updateProductDto.getCategories())) {
+            // Update the categories of the product
+            List<String> categoryNames = updateProductDto.getCategories();
+            List<Category> existingCategories = categoryRepository.findByNameIn(categoryNames);
+            List<Category> categories = new ArrayList<>();
 
-            if (existingCategory.isPresent()) {
-                categories.add(existingCategory.get());
-            } else {
-                Category newCategory = Category.builder().name(categoryName).build();
-                newCategory = categoryRepository.save(newCategory);
-                categories.add(newCategory);
+            for (String categoryName : categoryNames) {
+                Optional<Category> existingCategory = existingCategories.stream()
+                        .filter(category -> category.getName().equals(categoryName))
+                        .findFirst();
+
+                if (existingCategory.isPresent()) {
+                    categories.add(existingCategory.get());
+                } else {
+                    Category newCategory = Category.builder().name(categoryName).build();
+                    newCategory = categoryRepository.save(newCategory);
+                    categories.add(newCategory);
+                }
             }
+            existingProduct.setCategories(new HashSet<>(categories));
         }
 
-        existingProduct.setCategories(new HashSet<>(categories));
+
 
         // Save the updated product in the productRepository
         Product updatedProduct = productRepository.save(existingProduct);

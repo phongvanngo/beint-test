@@ -41,7 +41,7 @@ public class ProductController {
     public ResponseEntity<DataResponse<ProductDto>> create(@Valid @RequestBody CreateProductDto createProductDto, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            throw new ValidationException(errorParser.get(Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage()));
+            throw new ValidationException(errorParser.parse(Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage()));
         };
 
         return new ResponseEntity<>(new DataResponse<>(productCreationService.createProduct(createProductDto)), HttpStatus.OK);
@@ -55,4 +55,11 @@ public class ProductController {
         };
         return new ResponseEntity<>(new DataResponse<>(productUpdationService.updateProduct(productId, updateProductDto)), HttpStatus.OK);
     }
+
+    @GetMapping("/{productId}")
+    public ResponseEntity<DataResponse<ProductDto>> get(@PathVariable Long productId) {
+        return new ResponseEntity<>(new DataResponse<>(productRetrievalService.getProduct(productId)), HttpStatus.OK);
+    }
+
+
 }

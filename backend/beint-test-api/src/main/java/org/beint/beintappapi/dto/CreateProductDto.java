@@ -13,18 +13,18 @@ import java.util.List;
  */
 @Data
 public class CreateProductDto implements Serializable {
-    @NotNull(message = "${code.empty}")
-    @NotEmpty(message = "${code.empty}")
-    @NotBlank(message = "${code.empty}")
+    @NotNull(message = "{code.empty}")
+    @NotEmpty(message = "{code.empty}")
+    @NotBlank(message = "{code.empty}")
     private String code;
 
-    @NotNull(message = "${category.empty}")
-    @NotEmpty(message = "${category.empty}")
+    @NotNull(message = "{category.empty}")
+    @NotEmpty(message = "{category.empty}")
     private List<String> categories;
 
-    @NotNull(message = "${name.empty}")
-    @NotEmpty(message = "${name.empty}")
-    @NotBlank(message = "${name.empty}")
+    @NotNull(message = "{name.empty}")
+    @NotEmpty(message = "{name.empty}")
+    @NotBlank(message = "{name.empty}")
     private String name;
 
     private String brand;
