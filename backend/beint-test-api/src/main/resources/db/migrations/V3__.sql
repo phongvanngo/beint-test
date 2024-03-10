@@ -1,0 +1,2 @@
+ALTER TABLE products
+    ADD updated_at TIMESTAMP WITH TIME ZONE;

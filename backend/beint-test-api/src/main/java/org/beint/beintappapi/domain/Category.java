@@ -2,14 +2,19 @@ package org.beint.beintappapi.domain;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.TimeZoneStorage;
+import org.hibernate.annotations.TimeZoneStorageType;
 
-import java.util.List;
+import java.time.ZonedDateTime;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "categories")
@@ -22,6 +27,15 @@ public class Category {
     @Column(nullable = false)
     private String name;
 
-    @ManyToMany(mappedBy = "categories") // Owning side is Product (mappedBy)
-    private List<Product> products;
+    private String description;
+
+    @Column(name = "created_at", nullable = false)
+    @TimeZoneStorage(TimeZoneStorageType.NATIVE)
+    @CreationTimestamp
+    private ZonedDateTime createdAt;
+
+    @ManyToMany(mappedBy = "categories", cascade = CascadeType.PERSIST)
+    @ToString.Exclude
+    private Set<Product> products = new LinkedHashSet<>();
+
 }
