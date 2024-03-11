@@ -6,7 +6,7 @@ import queryString from 'query-string';
 
 export interface GetProductRequest {
     page: number;
-    limit:number;
+    size:number;
 }
 
 export async function getProducts(getProductRequest: GetProductRequest) : Promise<PageData<Product>> {

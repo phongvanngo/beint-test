@@ -1,17 +1,12 @@
-import React from "react";
+import type { TableColumnsType, TablePaginationConfig } from "antd";
 import { Table } from "antd";
-import type { TableColumnsType } from "antd";
+import { useEffect, useState } from "react";
 import { Product } from "../types/Product";
+import { PageData } from "../types/common";
 
 interface Props {
-  data: Product[];
-}
-
-interface DataType {
-  key: React.Key;
-  name: string;
-  age: number;
-  address: string;
+  pageData: PageData<Product>;
+  onChangePage: (args: { page: number; size: number }) => Promise<void>;
 }
 
 const columns: TableColumnsType<Product> = [
@@ -55,8 +50,43 @@ const columns: TableColumnsType<Product> = [
   },
 ];
 
-export default function ProductTable({ data }: Props) {
+export default function ProductTable({ pageData, onChangePage }: Props) {
+
+  console.log("pageData:",pageData);
+
+  const [pagination, setPagination] = useState<TablePaginationConfig>();
+  const [loading, setLoading] = useState(false);
+
+  const handleTableChange = async (pagination: TablePaginationConfig) => {
+    console.log("paginaiton: ",pagination);
+    try {
+      setLoading(true);
+      await onChangePage({
+        page: (pagination.current || 2 ) - 1,
+        size: pagination.pageSize || 10,
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    const pagination: TablePaginationConfig = {
+      current: pageData.page + 1,
+      pageSize: pageData.limit,
+      total: pageData.totalElements
+    };
+    setPagination(pagination);
+  }, [pageData]);
+
   return (
-    <Table columns={columns} dataSource={data} scroll={{ x: 1500, y: 300 }} />
+    <Table
+      columns={columns}
+      dataSource={pageData.data}
+      scroll={{ x: 1500, y: 300 }}
+      pagination={pagination}
+      onChange={handleTableChange}
+      loading={loading}
+    />
   );
 }
