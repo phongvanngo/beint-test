@@ -30,11 +30,11 @@ public class ProductUpdationServiceImpl implements ProductUpdationService {
     @Override
     @Transactional
     public ProductDto updateProduct(Long productId, UpdateProductDto updateProductDto) {
-        // Retrieve the existing product from the productRepository
+        
         Product existingProduct = productRepository.findById(productId)
                 .orElseThrow(() -> new NotFoundException(errorParser.get("product.not-found")));
 
-        // Update the attributes of the existing product with the values from the updateProductDto
+        
         existingProduct.setDescription(updateProductDto.getDescription());
         existingProduct.setCode(updateProductDto.getCode());
         existingProduct.setName(updateProductDto.getName());
@@ -43,7 +43,7 @@ public class ProductUpdationServiceImpl implements ProductUpdationService {
 
 
         if (ObjectUtils.isNotEmpty(updateProductDto.getCategories())) {
-            // Update the categories of the product
+            
             List<String> categoryNames = updateProductDto.getCategories();
             List<Category> existingCategories = categoryRepository.findByNameIn(categoryNames);
             List<Category> categories = new ArrayList<>();
@@ -66,10 +66,10 @@ public class ProductUpdationServiceImpl implements ProductUpdationService {
 
 
 
-        // Save the updated product in the productRepository
+        
         Product updatedProduct = productRepository.save(existingProduct);
 
-        // Map the updated product to a ProductDto and return it
+        
         return productMapper.toDto(updatedProduct);
     }
 }

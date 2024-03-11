@@ -1,13 +1,13 @@
-import './App.css'
-import UseDataTable from './components/table/UseDataTable'
+import "./App.css";
+import ProductTable from "./components/ProductTable";
+import ProductPage from "./pages/ProductPage";
 
 function App() {
-
   return (
     <>
-           <UseDataTable />
+      <ProductPage />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -15,7 +15,7 @@ public class MessageSourceConfig {
     public MessageSource messageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
         messageSource.setBasename("classpath:i18n/messages");
-        messageSource.setCacheSeconds(10); // Optional: Cache for 10 seconds
+        messageSource.setCacheSeconds(10); 
         return messageSource;
     }
 }

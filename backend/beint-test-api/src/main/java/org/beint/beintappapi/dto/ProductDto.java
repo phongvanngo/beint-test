@@ -21,6 +21,6 @@ public class ProductDto {
     String type;
     String description;
     ZonedDateTime createdAt;
-    ZonedDateTime updated_at;
+    ZonedDateTime updatedAt;
     Set<CategoryDto> categories;
 }

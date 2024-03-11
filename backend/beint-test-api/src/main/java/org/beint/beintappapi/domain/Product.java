@@ -40,7 +40,7 @@ public class Product {
     @Column(name = "updated_at", nullable = false)
     @TimeZoneStorage(TimeZoneStorageType.NATIVE)
     @CreationTimestamp
-    private ZonedDateTime updated_at;
+    private ZonedDateTime updatedAt;
 
     @ToString.Exclude
     @ManyToMany(cascade = CascadeType.PERSIST)
