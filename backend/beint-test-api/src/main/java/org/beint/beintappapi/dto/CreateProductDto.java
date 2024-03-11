@@ -6,7 +6,6 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * DTO for {@link org.beint.beintappapi.domain.Product}
@@ -20,7 +19,8 @@ public class CreateProductDto implements Serializable {
 
     @NotNull(message = "{category.empty}")
     @NotEmpty(message = "{category.empty}")
-    private List<String> categories;
+    @NotBlank(message = "{code.empty}")
+    private  String category;
 
     @NotNull(message = "{name.empty}")
     @NotEmpty(message = "{name.empty}")

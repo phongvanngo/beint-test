@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.ZonedDateTime;
-import java.util.Set;
 
 /**
  * DTO for {@link org.beint.beintappapi.domain.Product}
@@ -20,7 +19,7 @@ public class ProductDto {
     String brand;
     String type;
     String description;
+    String category;
     ZonedDateTime createdAt;
     ZonedDateTime updatedAt;
-    Set<CategoryDto> categories;
 }

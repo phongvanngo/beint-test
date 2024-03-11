@@ -8,8 +8,6 @@ import org.hibernate.annotations.TimeZoneStorage;
 import org.hibernate.annotations.TimeZoneStorageType;
 
 import java.time.ZonedDateTime;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 @Entity
 @Getter
@@ -31,6 +29,7 @@ public class Product {
     private String brand;
     private String type;
     private String description;
+    private String category;
 
     @Column(name = "created_at", nullable = false)
     @TimeZoneStorage(TimeZoneStorageType.NATIVE)
@@ -41,12 +40,5 @@ public class Product {
     @TimeZoneStorage(TimeZoneStorageType.NATIVE)
     @CreationTimestamp
     private ZonedDateTime updatedAt;
-
-    @ToString.Exclude
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(name = "products_categories",
-            joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private Set<Category> categories = new LinkedHashSet<>();
 
 }

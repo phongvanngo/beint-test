@@ -13,6 +13,7 @@ import org.beint.beintappapi.utils.ErrorParser;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,7 +30,11 @@ public class ProductRetrievalServiceImpl implements ProductRetrievalService {
     @Override
     public PageData<ProductDto> getProducts(Pageable pageable) {
 
-        Pageable queryPageable = PageRequest.of(pageable.getPageNumber(),pageable.getPageSize());
+        Pageable queryPageable = PageRequest.of(
+                pageable.getPageNumber(),
+                pageable.getPageSize(),
+                Sort.by("id").ascending()
+        );
 
         Page<Product> productPage = productRepository.findAll(queryPageable);
 
