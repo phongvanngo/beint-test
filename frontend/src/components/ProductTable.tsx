@@ -36,7 +36,7 @@ const columns: TableColumnsType<Product> = [
     width: 150,
   },
   {
-    title: "description:",
+    title: "description",
     dataIndex: "description",
     key: "description",
     width: 150,
@@ -51,18 +51,16 @@ const columns: TableColumnsType<Product> = [
 ];
 
 export default function ProductTable({ pageData, onChangePage }: Props) {
-
-  console.log("pageData:",pageData);
-
   const [pagination, setPagination] = useState<TablePaginationConfig>();
   const [loading, setLoading] = useState(false);
 
   const handleTableChange = async (pagination: TablePaginationConfig) => {
-    console.log("paginaiton: ",pagination);
     try {
       setLoading(true);
+      let page = (pagination.current || 2);
+      if (pagination.pageSize != pageData.limit) page = 1;
       await onChangePage({
-        page: (pagination.current || 2 ) - 1,
+        page,
         size: pagination.pageSize || 10,
       });
     } finally {
@@ -74,19 +72,21 @@ export default function ProductTable({ pageData, onChangePage }: Props) {
     const pagination: TablePaginationConfig = {
       current: pageData.page + 1,
       pageSize: pageData.limit,
-      total: pageData.totalElements
+      total: pageData.totalElements,
     };
     setPagination(pagination);
   }, [pageData]);
 
   return (
-    <Table
-      columns={columns}
-      dataSource={pageData.data}
-      scroll={{ x: 1500, y: 300 }}
-      pagination={pagination}
-      onChange={handleTableChange}
-      loading={loading}
-    />
+    <div>
+      <Table
+        columns={columns}
+        dataSource={pageData.data}
+        scroll={{ x:0,y:500}}
+        pagination={pagination}
+        onChange={handleTableChange}
+        loading={loading}
+      />
+    </div>
   );
 }
