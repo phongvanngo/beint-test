@@ -2,15 +2,15 @@ version: '3'
 services:
   postgres:
     image: 'postgres:latest'
-    container_name: "benit-app-db-dev"
+    container_name: "benit-app-db"
     env_file:
       - .env
     ports:
       - ${DB_PORT}:5432
-  beint-app-api-dev:
-    container_name: "benit-app-api-dev"
+  beint-app-api:
+    container_name: "benit-app-api"
     build:
-      context: .
+      context: ./backend/beint-test-api
       dockerfile: Dockerfile
     ports:
       - ${API_PORT}:8080

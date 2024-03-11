@@ -26,6 +26,7 @@ public class BeintAppApiApplication implements ApplicationListener<ApplicationRe
         System.out.println("=== Application Configuration ===");
         String activeProfiles = String.join(",", environment.getActiveProfiles());
         System.out.println("Current Environment: " + activeProfiles);
+        System.out.println("SERVER_PORT: " + environment.getProperty("server.port"));
         System.out.println("SPRING_DATASOURCE_URL: " + environment.getProperty("spring.datasource.url"));
         System.out.println("SPRING_DATASOURCE_USERNAME: " + environment.getProperty("spring.datasource.username"));
         System.out.println("SPRING_DATASOURCE_PASSWORD: " + environment.getProperty("spring.datasource.password"));

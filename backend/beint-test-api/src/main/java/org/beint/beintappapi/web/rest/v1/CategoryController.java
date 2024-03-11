@@ -2,6 +2,7 @@ package org.beint.beintappapi.web.rest.v1;
 
 import lombok.RequiredArgsConstructor;
 import org.beint.beintappapi.dto.CategoryDto;
+import org.beint.beintappapi.dto.response.DataResponse;
 import org.beint.beintappapi.service.category.CategoryService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +20,8 @@ public class CategoryController {
 
     private final CategoryService categoryService;
     @GetMapping()
-    public ResponseEntity<List<CategoryDto>> get() {
-        return new ResponseEntity<>(categoryService.getCategory(), HttpStatus.OK);
+    public ResponseEntity<DataResponse<List<CategoryDto>>> get() {
+        return new ResponseEntity<>(new DataResponse<>(categoryService.getCategory()), HttpStatus.OK);
     }
 
 
