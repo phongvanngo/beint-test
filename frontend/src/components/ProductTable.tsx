@@ -5,11 +5,6 @@ import { Product } from "../types/Product";
 import { PageData } from "../types/common";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
-const defaultPagination = {
-  page: 1,
-  size: 10,
-};
-
 const pageSizeOptions = ["10", "20", "25"];
 
 interface Props {
@@ -77,7 +72,7 @@ export default function ProductTable({
       key: "operation",
       fixed: "right",
       width: 100,
-      render: (text, record, index) => (
+      render: (_, record) => (
         <Flex gap="small">
           <Button
             type="primary"

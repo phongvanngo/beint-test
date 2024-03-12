@@ -32,6 +32,6 @@ export async function updateProduct(
   return (await axiosClient.put(`/products/${id}`, updateProductRequest)).data;
 }
 
-export async function deleteProduct(id: number): Promise<String> {
+export async function deleteProduct(id: number): Promise<string> {
   return (await axiosClient.delete(`/products/${id}`)).data;
 }

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { PlusOutlined } from "@ant-design/icons";
 import { Button } from "antd";
 import { useEffect, useState } from "react";
@@ -17,9 +18,7 @@ import {
 } from "../types/Product";
 import { PageData } from "../types/common";
 
-type Props = {};
-
-export default function ProductPage({}: Props) {
+export default function ProductPage() {
   const [productPageData, setProductPageData] = useState<PageData<Product>>();
   const [idEditingProduct, setIdEditingProduct] = useState<number>();
   const [openCreateNewModal, setOpenCreateNewModal] = useState(false);
@@ -56,6 +55,7 @@ export default function ProductPage({}: Props) {
     setProductPageData(response);
     updateQueryParams(page, size);
   }
+
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
     const page = parseInt(searchParams.get("page") || "1");

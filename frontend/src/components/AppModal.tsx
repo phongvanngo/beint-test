@@ -1,5 +1,5 @@
 import { Modal } from "antd";
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 
 type Props = {
   title: string;
@@ -17,7 +17,7 @@ const AppModal = ({ title, onClose, open, Component }: Props) => {
       onCancel={onClose}
       maskClosable={false}
     >
-      {open ? Component : null}
+      {Component}
     </Modal>
   );
 };

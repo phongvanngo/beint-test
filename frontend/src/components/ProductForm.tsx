@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Button, Form, Input } from "antd";
+import { useEffect } from "react";
 import { NewProductRequest, UpdateProductRequest } from "../types/Product";
-import { useEffect, useState } from "react";
 
 const formItemLayout = {
   labelCol: {
