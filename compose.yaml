@@ -18,3 +18,12 @@ services:
       - postgres
     env_file:
       - .env
+  beint-app:
+    container_name: "beint-app"
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        - API_URL=${BASE_URL}
+    ports:
+      - ${APP_PORT}:80

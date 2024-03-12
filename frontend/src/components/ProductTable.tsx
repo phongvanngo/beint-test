@@ -5,6 +5,13 @@ import { Product } from "../types/Product";
 import { PageData } from "../types/common";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
+const defaultPagination = {
+  page: 1,
+  size: 10,
+};
+
+const pageSizeOptions = ["10", "20", "25"];
+
 interface Props {
   pageData: PageData<Product>;
   onChangePage: (args: { page: number; size: number }) => Promise<void>;
@@ -113,6 +120,7 @@ export default function ProductTable({
       current: pageData.page + 1,
       pageSize: pageData.limit,
       total: pageData.totalElements,
+      pageSizeOptions: pageSizeOptions
     };
     setPagination(pagination);
   }, [pageData]);
