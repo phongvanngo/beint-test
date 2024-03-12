@@ -10,7 +10,7 @@ services:
   beint-app-api:
     container_name: "benit-app-api"
     build:
-      context: ./backend/beint-test-api
+      context: ./backend/beint-app-api
       dockerfile: Dockerfile
     ports:
       - ${API_PORT}:8080
